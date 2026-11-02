@@ -41,7 +41,7 @@ userSchema.methods.toSafeJSON = function () {
     id: this._id,
     name: this.name,
     email: this.email,
-    checkinCount: this.checkins.length,
+    checkinCount: Array.isArray(this.checkins) ? this.checkins.length : 0,
     nextReminder: this.nextReminder,
   };
 };

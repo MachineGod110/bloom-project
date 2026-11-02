@@ -33,7 +33,8 @@ router.post("/signup", async (req, res) => {
     res.cookie("bloom_token", token, COOKIE_OPTS);
     res.status(201).json({ ...user.toSafeJSON(), token });
   } catch (err) {
-    res.status(500).json({ message: "Something went wrong creating your account." });
+    console.error("Signup error details:", err);
+    res.status(500).json({ message: err.message || "Something went wrong creating your account." });
   }
 });
 
@@ -54,7 +55,8 @@ router.post("/login", async (req, res) => {
     res.cookie("bloom_token", token, COOKIE_OPTS);
     res.json({ ...user.toSafeJSON(), token });
   } catch (err) {
-    res.status(500).json({ message: "Something went wrong logging you in." });
+    console.error("Login error details:", err);
+    res.status(500).json({ message: err.message || "Something went wrong logging you in." });
   }
 });
 
