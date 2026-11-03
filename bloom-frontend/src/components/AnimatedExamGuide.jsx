@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { submitCheckin } from "../services/api";
 
 const EXAM_STAGES = [
@@ -83,6 +84,7 @@ const EXAM_STAGES = [
 ];
 
 export default function AnimatedExamGuide({ user, onOpenAuth, onExamComplete }) {
+  const navigate = useNavigate();
   const [currentStageIdx, setCurrentStageIdx] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [answers, setAnswers] = useState({});
@@ -503,9 +505,13 @@ export default function AnimatedExamGuide({ user, onOpenAuth, onExamComplete }) 
                   <p style={{ fontSize: "0.85rem", marginTop: 4 }}>
                     Your new assessment data has been recorded. You can view your updated risk graph and historical habit trends on your dedicated Dashboard.
                   </p>
-                  <a href="/dashboard" className="btn btn-primary" style={{ marginTop: 14 }}>
+                  <button
+                    className="btn btn-primary"
+                    style={{ marginTop: 14 }}
+                    onClick={() => navigate("/dashboard")}
+                  >
                     View Dashboard & Health Risk Chart →
-                  </a>
+                  </button>
                 </div>
               ) : (
                 <div className="guest-gated-box">
